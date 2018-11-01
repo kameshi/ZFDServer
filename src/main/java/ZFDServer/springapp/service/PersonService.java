@@ -34,7 +34,7 @@ public class PersonService{
         return this.personDAO.save(PersonMapper.toPerson(personDTO));
     }
 
-    public void updatePerson(PersonDTO personDTO) {
+    public void updatePerson(Long personId, PersonDTO personDTO) {
     }
 
     public void deletePerson(Long personId) {

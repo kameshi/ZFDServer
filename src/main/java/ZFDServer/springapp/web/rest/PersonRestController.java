@@ -25,7 +25,7 @@ public class PersonRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public static ResponseEntity insertPerson(PersonDTO personDTO) throws Exception {
+    public static ResponseEntity insertPerson(@RequestBody PersonDTO personDTO) throws Exception {
         try {
             personService.insertPerson(personDTO);
             return new ResponseEntity(HttpStatus.OK);
@@ -46,10 +46,10 @@ public class PersonRestController {
         }
     }
 
-    @PatchMapping(value = "/{carId}")
-    public static int updatePerson(PersonDTO personDTO) throws Exception {
+    @PatchMapping(value = "/{personId}")
+    public static int updatePerson(@PathVariable Long personId,@RequestBody PersonDTO personDTO) throws Exception {
         try {
-            personService.updatePerson(personDTO);
+            personService.updatePerson(personId, personDTO);
             return 1;
         }
         catch (Exception e){
@@ -57,8 +57,8 @@ public class PersonRestController {
         }
     }
 
-    @DeleteMapping(value = "/{carId}")
-    public static int deletePerson(Long personId) {
+    @DeleteMapping(value = "/{personId}")
+    public static int deletePerson(@PathVariable Long personId) {
         try {
             personService.deletePerson(personId);
             return 1;
@@ -68,7 +68,7 @@ public class PersonRestController {
         }
     }
 
-    @GetMapping(value = "/{carId}")
+    @GetMapping(value = "/{accountId}")
     private ResponseEntity findPersonByAccount(@PathVariable Long accountId) {
         try {
             List<PersonDTO> personDTO = personService.findPersonByAccount(accountId);
