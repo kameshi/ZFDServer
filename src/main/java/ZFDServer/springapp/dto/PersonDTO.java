@@ -68,4 +68,5 @@ public class PersonDTO implements Serializable {
     public void setAccount(AccountDTO account) {
         this.account = account;
     }
+
 }

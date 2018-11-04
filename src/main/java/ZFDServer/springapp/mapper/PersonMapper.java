@@ -14,7 +14,9 @@ public class PersonMapper {
         personDTO.setBirthDate(person.getBirthDate());
         personDTO.setEmail(person.getEmail());
         personDTO.setAccessRight(person.getAccessRight());
-        personDTO.setAccount(AccountMapper.toAccountDTO(person.getAccount()));
+        if(person.getAccount() != null) {
+            personDTO.setAccount(AccountMapper.toAccountDTO(person.getAccount()));
+        }
         return personDTO;
     }
 
@@ -26,7 +28,9 @@ public class PersonMapper {
         person.setBirthDate(personDTO.getBirthDate());
         person.setEmail(personDTO.getEmail());
         person.setAccessRight(personDTO.getAccessRight());
-        person.setAccount(AccountMapper.toAccount(personDTO.getAccount()));
+        if(personDTO.getAccount() != null) {
+            person.setAccount(AccountMapper.toAccount(personDTO.getAccount()));
+        }
         return person;
     }
 

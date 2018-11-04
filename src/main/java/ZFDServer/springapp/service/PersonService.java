@@ -35,9 +35,12 @@ public class PersonService{
     }
 
     public void updatePerson(Long personId, PersonDTO personDTO) {
+        personDTO.setIdPerson(personId);
+        personDAO.save(PersonMapper.toPerson(personDTO));
     }
 
     public void deletePerson(Long personId) {
+        personDAO.deleteById(personId);
     }
 
     public List<PersonDTO> findPersonByAccount(Long accountId) throws Exception {

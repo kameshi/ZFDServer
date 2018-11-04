@@ -7,11 +7,12 @@ public class AccountMapper {
 
     public static AccountDTO toAccountDTO(Account account){
         AccountDTO accountDTO = new AccountDTO();
-        System.out.println(account.toString());
         accountDTO.setIdAccount(account.getIdAccount());
         accountDTO.setLogin(account.getLogin());
         accountDTO.setPassword(account.getPassword());
         accountDTO.setEmail(account.getEmail());
+        accountDTO.setConfirmation(account.getConfirmation());
+        accountDTO.setCreatedate(account.getCreatedate());
         return accountDTO;
     }
 
@@ -21,6 +22,8 @@ public class AccountMapper {
         account.setLogin(accountDTO.getLogin());
         account.setPassword(accountDTO.getPassword());
         account.setEmail(accountDTO.getEmail());
+        account.setConfirmation(accountDTO.getConfirmation());
+        account.setCreatedate(accountDTO.getCreatedate());
         return account;
     }
 }

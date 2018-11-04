@@ -4,6 +4,8 @@ package ZFDServer.springapp.mapper;
 import ZFDServer.model.Wallet;
 import ZFDServer.springapp.dto.WalletDTO;
 
+import javax.validation.constraints.Null;
+
 public class WalletMapper {
 
     public static WalletDTO toWalletDTO(Wallet wallet){
@@ -14,7 +16,9 @@ public class WalletMapper {
         walletDTO.setAmount(wallet.getAmount());
         walletDTO.setCreationDate(wallet.getCreationDate());
         walletDTO.setDescription(wallet.getDescription());
-        walletDTO.setPerson(PersonMapper.toPersonDTO(wallet.getPerson()));
+        if(wallet.getPerson() != null) {
+            walletDTO.setPerson(PersonMapper.toPersonDTO(wallet.getPerson()));
+        }
         return walletDTO;
     }
 
@@ -26,7 +30,9 @@ public class WalletMapper {
         wallet.setAmount(walletDTO.getAmount());
         wallet.setCreationDate(walletDTO.getCreationDate());
         wallet.setDescription(walletDTO.getDescription());
-        wallet.setPerson(PersonMapper.toPerson(walletDTO.getPerson()));
+        if(walletDTO.getPerson() != null) {
+            wallet.setPerson(PersonMapper.toPerson(walletDTO.getPerson()));
+        }
         return wallet;
     }
 }

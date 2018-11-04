@@ -1,5 +1,6 @@
 package ZFDServer.springapp.web.rest;
 
+import ZFDServer.springapp.dto.AccountDTO;
 import ZFDServer.springapp.dto.PersonDTO;
 import ZFDServer.springapp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class PersonRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public static ResponseEntity insertPerson(@RequestBody PersonDTO personDTO) throws Exception {
+    private ResponseEntity insertPerson(@RequestBody PersonDTO personDTO) throws Exception {
         try {
             personService.insertPerson(personDTO);
             return new ResponseEntity(HttpStatus.OK);
@@ -36,7 +37,7 @@ public class PersonRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public static ResponseEntity<Object> getPersonDTO() throws Exception {
+    private ResponseEntity<Object> getPersonDTO() throws Exception {
         try {
             List<PersonDTO> personDTOList = personService.getPersonDTO();
             return new ResponseEntity<Object>(personDTOList, HttpStatus.OK);
@@ -46,25 +47,28 @@ public class PersonRestController {
         }
     }
 
-    @PatchMapping(value = "/{personId}")
-    public static int updatePerson(@PathVariable Long personId,@RequestBody PersonDTO personDTO) throws Exception {
+    @PatchMapping(value = "/{personId}/{accountId}")
+    private ResponseEntity updatePerson(@PathVariable Long personId, @PathVariable Long accountId,@RequestBody PersonDTO personDTO) throws Exception {
         try {
+            AccountDTO accountDTO = new AccountDTO();
+            accountDTO.setIdAccount(accountId);
+            personDTO.setAccount(accountDTO);
             personService.updatePerson(personId, personDTO);
-            return 1;
+            return new ResponseEntity(HttpStatus.OK);
         }
         catch (Exception e){
-            return -1;
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping(value = "/{personId}")
-    public static int deletePerson(@PathVariable Long personId) {
+    private ResponseEntity deletePerson(@PathVariable Long personId) {
         try {
             personService.deletePerson(personId);
-            return 1;
+            return new ResponseEntity(HttpStatus.OK);
         }
         catch (Exception e){
-            return -1;
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

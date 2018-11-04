@@ -1,6 +1,7 @@
 package ZFDServer.springapp.dto;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class AccountDTO implements Serializable {
 
@@ -8,8 +9,8 @@ public class AccountDTO implements Serializable {
     private String login;
     private String email;
     private String password;
-    private String phoneNumber;
     private String confirmation;
+    private Date createdate;
 
     public Long getIdAccount() {
         return idAccount;
@@ -43,19 +44,19 @@ public class AccountDTO implements Serializable {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getConfirmation() {
         return confirmation;
     }
 
     public void setConfirmation(String confirmation) {
         this.confirmation = confirmation;
+    }
+
+    public Date getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 }
